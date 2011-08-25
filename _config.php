@@ -3,6 +3,9 @@
 $link = 'admin/'.KickAssetAdmin::$url_segment;
 CMSMenu::replace_menu_item("AssetAdmin","Browse files...",$link,"KickAssetAdmin",2);
 
+// We're using our own custom menu insertion. Don't need another one.
+CMSMenu::remove_menu_item("KickAssetAdmin");
+
 Director::addRules(10, array (
 	$link => 'KickAssetAdmin'
 ));
