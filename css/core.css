@@ -1,0 +1,40 @@
+/******** RESET.CSS ********
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 3.0.0
+build: 1549
+*/
+html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+
+/******** FONTS.CSS ********
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 3.0.0
+build: 1549
+*/
+body{font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}select,input,button,textarea{font:99% arial,helvetica,clean,sans-serif;}table{font-size:inherit;font:100%;}pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+/******** BASE.CSS ********
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 3.0.0
+build: 1549
+*/
+h1{font-size:138.5%;}h2{font-size:123.1%;}h3{font-size:108%;}h1,h2,h3,h4,h5,h6,strong{font-weight:bold;}abbr,acronym{border-bottom:1px dotted #000;cursor:help;}em{font-style:italic;}ol,ul,dl{margin-left:2em;}ol li{list-style:decimal outside;}ul li{list-style:disc outside;}dl dd{margin-left:1em;}th,td{border:1px solid #000;padding:.5em;}th{font-weight:bold;text-align:center;}caption{margin-bottom:.5em;text-align:center;}input[type=text],input[type=password],textarea{width:12.25em;*width:11.9em;}
+
+/******** LAYOUT.CSS ********/
+html{background:transparent}body{margin:0;padding:0}img{border:0}#main,#header,#footer,#nav,#utilnav{margin:0 auto;clear:both}
+/* columns */#primaryContent,#sideContent,#secondaryContent{float:left}
+/* clearfix */.clr,.clearfix{overflow:hidden}.clr:after,.clearfix:after{content:"";display:block;height:0;clear:both;visibility:hidden;font-size:0}/* ie6 */* html .clr,* html .clearfix{zoom:1}/* ie7 */*:first-child+html .clr,*:first-child+html .clearfix{zoom:1}
+
+/******** FORM.CSS ********/
+/* firefox rendering */textarea >.anonymous-div,input >.anonymous-div{padding:0}
+/* top aligned labels (default) */form .field{margin:0 0 10px;padding:0;clear:both}form .field label{display:block;font-weight:700;margin-bottom:1px;font-size:12px;width:auto;float:none}form .field ul,form .field li{list-style:none;margin:0}form .field ul{margin:5px 0}form .field li{margin:0 0 10px}form .field li input{float:left}form .field li label{font-weight:400;display:block;float:left}form .password input,form .text input,form .email input,form .textarea textarea,form .encrypt input,form .numeric input{border:1px solid #ccc;font-size:12px;padding:2px;float:none}form .textarea textarea{width:350px}form select{font-size:12px;padding:2px}form .checkbox input,form .checkbox label{float:none}form .checkbox label{display:inline}form ul.checkboxset,form ul.checkboxset li,form ul.optionset,form ul.optionset li{list-style:none;margin-left:0}form ul.checkboxset,form ul.optionset{margin:0 0 0 10px}form ul.checkboxset li,form ul.optionset li{margin:0 0 5px;overflow:hidden}form ul.checkboxset input,form ul.optionset input{float:left;clear:left}form ul.checkboxset label,form ul.optionset label{float:left;width:auto;margin-left:8px}form span.required,form span.validation{display:block;clear:left;margin:5px 0 0 0;font-size:11px;color:#a00;font-weight:700;line-height:16px}form label span.required{clear:none;display:inline;}form div.validationError{margin-bottom:4px}form div.validationError input,form div.validationError textarea{background-color:#fffbf6;border-width:2px}form div.Actions{margin:0;clear:both}form div.Actions input.secondary{background:none;color:#900;float:right}
+/* left aligned labels */form.left .field{overflow:hidden}form.left .field label{width:150px;padding-right:10px;float:left}form.left .field input,form.left .field textarea,form.left .field select{float:left}form.left ul.checkboxset,form.left ul.optionset{float:left;margin:0}form.left ul.checkboxset label,form.left ul.optionset label{width:auto}form.left .checkbox input,form.left .checkbox label{float:none}form.left .checkbox input{margin-left:160px}form.left div.Actions{margin-left:160px}
+/* right aligned labels */form.right .field{overflow:hidden}form.right .field label{width:150px;padding-right:10px;float:left;text-align:right}form.right .field input,form.right .field textarea,form.right .field select{float:left}form.right ul.checkboxset,form.right ul.optionset{float:left;margin:0}form.right ul.checkboxset label,form.right ul.optionset label{width:auto;text-align:left}form.right .checkbox input,form.right .checkbox label{float:none;text-align:left}form.right .checkbox input{margin-left:160px}form.right div.Actions{margin-left:160px}
+
+/******** CORE.CSS ********/
+*{outline:0;}h1,h2,h3,h4,h5,h6,p{margin-top:0;}h1{font-size:36px;}h2{font-size:24px;}h3{font-size:18px;}h4{font-size:14px;}div.skipnav{position:absolute;top:-9999px;}img.left{margin:0 10px 10px 0;float:left;}img.right{margin:0 0 10px 10px;float:right;}
