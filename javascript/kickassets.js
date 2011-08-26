@@ -320,14 +320,21 @@ $(document).ready(function() {
 	};
 	
 	
-	$('.file').live("dblclick", function() {
-		var $t = $(this);
+	$('.file img').live("dblclick", function() {
+		var $t = $(this).closest('li');
 		$('#edit').load(
 			$('base').attr('href')+"admin/files/editfile/"+$('#drop').data('folderid')+"/"+$t.data('id'),
 			openEditWindow
 		);
 
 	});
+	
+	$('.folder img').live('dblclick', function() {
+		var $t = $(this).closest('li');
+		window.location.href = $t.data('link');
+		return false;
+	});
+	
 	
 	
 	$('#delete').live("click", function() {

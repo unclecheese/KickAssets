@@ -1,7 +1,7 @@
 <ul id="directory_list">
 <% if Folders %>
 <% control Folders %>
-	<li class="folder" data-id="$Item.ID">
+	<li class="folder" data-id="$Item.ID" data-link="$Link">
 		<% include Folder %>
 	</li>
 <% end_control %>
