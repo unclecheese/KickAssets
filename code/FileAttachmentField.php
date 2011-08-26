@@ -8,12 +8,11 @@
  * @author UncleCheese <unclecheese@leftandmain.com>
  */
 class FileAttachmentField extends KickAssetField {
-	
-	
+
 	
 	/**
 	 * @var boolean A simple template variable that states whether this is a multiple
-			 		upload field or not
+	 *	 		upload field or not
 	 */
 	public $Multi = false;
 	
@@ -62,20 +61,18 @@ class FileAttachmentField extends KickAssetField {
 	public function refresh(SS_HTTPRequest $r) {
 		if($r->requestVar('ids')) {
 			$id = reset($r->requestVar('ids'));
-			$files = new DataObjectSet();
-			if($f = DataObject::get_by_id("File", (int) $id)) {
-				self::process_file($f);
-				$files->push($f);
+			if($file = DataObject::get_by_id("File", (int) $id)) {
+				$this->processFile($file);
 			}
 			else {
 				die("File $id doesn't exist");
 			}
 		}
 		else {
-			$files = $this->Files();
+			$file = $this->File();
 		}
 		return $this->customise(array(
-			'Files' => $files
+			'File' => $file
 		))->renderWith($this->AttachedFilesTemplate);
 	}	
 	
@@ -87,15 +84,11 @@ class FileAttachmentField extends KickAssetField {
 	 *
 	 * @return DataObjectSet
 	 */
-	public function Files() {
+	public function File() {
 		if($val = $this->Value()) {
-			if($files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($val).")")) {
-				$ret = new DataObjectSet();
-				foreach($files as $file) {
-					self::process_file($file);
-					$ret->push($file);					
-				}
-				return $ret;
+			if($file = DataObject::get_by_id("File", (int) $val)) {
+				$this->processFile($file);
+				return $file;
 			}
 		}
 		return false;

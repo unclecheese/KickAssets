@@ -15,7 +15,8 @@ abstract class KickAssetField extends FormField {
 	 */
 	static $allowed_actions = array (
 		'refresh',
-		'upload'
+		'upload',
+		'deletefile',
 	);
 	
 
@@ -40,15 +41,17 @@ abstract class KickAssetField extends FormField {
 	 *
 	 * @param File $file
 	 */
-	public static function process_file($file) {
+	protected function processFile($file) {
 		if($file->ClassName == "Image" || is_subclass_of($file->ClassName, "Image")) {
-			if($thumb = $file->CroppedImage(64,64)) {
+			if($thumb = $file->CroppedImage(32,32)) {
 				$file->Thumb = $thumb->getURL();			
 			}
 		}
 		else {
 			$file->Thumb = KickAssetUtil::get_icon($file);						
 		}
+		$file->EditLink = Director::absoluteBaseURL() . "/admin/files/select/{$file->ParentID}?edit=$file->ID";
+		$file->RemoveLink = $this->Link('deletefile?id='.$file->ID);
 	}
 	
 
@@ -70,6 +73,10 @@ abstract class KickAssetField extends FormField {
 	 * @return SS_HTTPResponse
 	 */
 	public function upload(SS_HTTPRequest $r) {
+		// We don't want anyone uploading to the root assets folder..
+		if(!$this->defaultFolder) {
+			$this->defaultFolder = Folder::findOrMake("Uploads");
+		}
 		$response = KickAssetUtil::handle_upload($r, $this->defaultFolder);
 		if(empty($response)) {
 			return new SS_HTTPResponse("File did not upload", 500);
@@ -79,6 +86,20 @@ abstract class KickAssetField extends FormField {
 		}
 		return new SS_HTTPResponse("Error: ".$response,500);
 		
+	}
+	
+	
+	/**
+	 * Delete a file
+	 *
+	 * @param SS_HTTPRequest
+	 */
+	public function deletefile(SS_HTTPRequest $r) {
+		if($file = DataObject::get_by_id("File", (int) $r->requestVar('id'))) {
+			$file->delete();
+			return new SS_HTTPResponse("OK",200);
+		}
+		return false;
 	}
 
 

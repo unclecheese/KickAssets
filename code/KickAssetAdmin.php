@@ -77,6 +77,13 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	public $SelectMode = false;
 	
 	
+	/*
+	 * @var boolean Determines if we're showing an edit form on load
+	 *
+	 */
+	public $editMode = false;
+	
+	
 	
 	/**
 	 * Loads the requirements, checks perms, etc. If an ID is in the URL, that becomes the
