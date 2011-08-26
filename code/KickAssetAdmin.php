@@ -12,7 +12,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	
 	/**
 	 * @var string The URL segment of the controller, preceded by "admin." Careful,
-	 				don't change this. Right now the JS expects a value of "files"
+	 *				don't change this. Right now the JS expects a value of "files"
 	 */	
 	static $url_segment = "files";
 	
@@ -72,7 +72,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	
 	/**
 	 * @var boolean Determines if the interface will support "selection" of files, e.g.
-	 				attaching them to pages.
+	 *				attaching them to pages.
 	 */	
 	public $SelectMode = false;
 	
@@ -564,7 +564,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		$owner->setEmptyString('('._t('KickAssets.NONE','None').')');
 		$folders->setEmptyString('(root)');
 		if($file->hasMethod('updateCMSFields')) {
-			$file->updateCMSFields(&$fields);
+			$file->updateCMSFields($fields);
 		}
 		return $fields;
 	}
