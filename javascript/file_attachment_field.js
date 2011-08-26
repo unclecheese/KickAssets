@@ -16,6 +16,8 @@ $(function() {
 			},
 			'onCleanup'			: function() {
 				var ids = $('#fancybox-frame').contents().find('#selected_files').text();
+				if(!ids.length) return;
+				
 				$parentField.closest('.FileAttachmentField').find('.attached_files').load(
 					$parentField.attr('data-refreshlink'),
 					{ 'ids' : ids.split(',') }
