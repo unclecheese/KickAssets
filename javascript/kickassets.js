@@ -74,6 +74,10 @@
 				apprise(http.responseText);
 			}
 			refreshFiles();
+			if($('#drop').is('.open')) {
+				var id = $('#Form_FileEditForm').find('[name=ID]').val();
+				$('li[data-id='+id+'] img').dblclick();
+			}
 		}, false);
 
 
