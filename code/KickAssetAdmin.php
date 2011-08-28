@@ -527,7 +527,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		return array(
 			'Link' => '',	
 			'Item' => $f,
-			'IconURL' => $image ? $f->SetHeight(64)->getURL() : KickAssetUtil::get_icon($f),
+			'IconURL' => $image ? (($i = $f->SetHeight(64)) ? $i->getURL() : KickAssetUtil::get_icon($f)) : KickAssetUtil::get_icon($f),
 			'Image' => $image,
 			'TooltipURL' => $tooltipurl
 		);

@@ -7,7 +7,7 @@
 	<% if Files %>
 		<% control Files %>
 			<div class="file_block">
-				<img src="$Thumb" height="16" /> $Name ($Size) <a href="#" class="detach_btn" data-id="$ID"><% _t('FileAttachmentField.DETACH','Detach file') %></a>
+				<img src="$Thumb" height="16" /> $Name ($Size) <a href="javascript:void(0);" class="detach_btn" data-id="$ID"><% _t('FileAttachmentField.DETACH','Detach file') %></a>
 				<input type="hidden" name="{$Top.Name}[]" value="$ID" />
 			</div>
 		<% end_control %>

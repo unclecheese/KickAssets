@@ -74,6 +74,10 @@
 				apprise(http.responseText);
 			}
 			refreshFiles();
+			if($('#drop').is('.open')) {
+				var id = $('#Form_FileEditForm').find('[name=ID]').val();
+				$('li[data-id='+id+']').dblclick();
+			}
 		}, false);
 
 
@@ -320,14 +324,19 @@ $(document).ready(function() {
 	};
 	
 	
-	$('.file').live("dblclick", function() {
-		var $t = $(this);
+	$('.file img').live("dblclick", function() {
+		var $t = $(this).closest('li');
 		$('#edit').load(
 			$('base').attr('href')+"admin/files/editfile/"+$('#drop').data('folderid')+"/"+$t.data('id'),
 			openEditWindow
 		);
 
 	});
+	
+	$('.folder img').live("dblclick", function() {
+		window.location = $(this).closest('li').data('link');
+		return false;
+	})
 	
 	
 	$('#delete').live("click", function() {
@@ -393,7 +402,7 @@ $(document).ready(function() {
 		return window.parent.$parentField;
 	}
 	
-	if(!getParent().is('.multi')) {
+	if(getParent() && !getParent().is('.multi')) {
 		$('#attach').addClass('single');
 	}
 	

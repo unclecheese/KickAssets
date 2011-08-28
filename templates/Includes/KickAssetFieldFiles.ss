@@ -24,7 +24,7 @@
 		<a href="$BrowseLink" class="file_attach_btn"><% _t('FileAttachmentField.BROWSEFILES','Browse files') %></a>
 		<% if Files %>
 			<% control Files %>
-				<a href="#" class="detach_btn" data-id="$ID"><% _t('FileAttachmentField.DETACH','Detach file') %></a>
+				<a href="javascript:void(0)" class="detach_btn" data-id="$ID"><% _t('FileAttachmentField.DETACH','Detach file') %></a>
 				<input type="hidden" name="{$Top.Name}ID" value="$ID" />
 			<% end_control %>
 		<% end_if %>

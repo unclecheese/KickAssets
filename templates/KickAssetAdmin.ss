@@ -30,11 +30,11 @@
 			</div>
 			<div id="actions">
 				<% if SelectMode %>
-					<a class="button disabled togglestate" id="attach" href="#"><% _t('KickAssetAdmin.ATTACHFILES','Attach selected file(s)') %></a>
+					<a class="button disabled togglestate" id="attach" href="javascript:void(0);"><% _t('KickAssetAdmin.ATTACHFILES','Attach selected file(s)') %></a>
 					<div id="selected_files"></div>
 				<% end_if %>
 
-				<a class="button disabled togglestate single" id="edit_button" href="#">Edit</a>				
+				<a class="button disabled togglestate single" id="edit_button" href="javascript:void(0);">Edit</a>				
 				<a class="button disabled togglestate" data-confirmtext="<% _t('KickAssetAdmin.DELETEFILES','Are you sure you want to delete the selected file(s)?') %>" id="delete" href="$DeleteLink">Delete</a>				
 			</div>
 			<div id="status">
