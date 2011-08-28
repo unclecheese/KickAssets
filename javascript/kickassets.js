@@ -76,7 +76,7 @@
 			refreshFiles();
 			if($('#drop').is('.open')) {
 				var id = $('#Form_FileEditForm').find('[name=ID]').val();
-				$('li[data-id='+id+']').dblclick();
+				$('li[data-id='+id+'] img').dblclick();
 			}
 		}, false);
 
@@ -333,11 +333,11 @@ $(document).ready(function() {
 
 	});
 	
-	$('.folder img').live("dblclick", function() {
-		window.location = $(this).closest('li').data('link');
+	$('.folder img').live('dblclick', function() {
+		var $t = $(this).closest('li');
+		window.location.href = $t.data('link');
 		return false;
-	})
-	
+	});
 	
 	$('#delete').live("click", function() {
 		if($(this).is('.disabled')) return false;
@@ -384,6 +384,17 @@ $(document).ready(function() {
 	$('#drop').css('width', $(window).width()-10+'px');		
 	doResize();
 	$('#footer').css('visibility','visible');
+
+	var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+	if(vars["edit"]) {
+		$('li[data-id='+vars["edit"]+'] img').dblclick();
+	}
 	
 	var ajaxTimeout;
 	

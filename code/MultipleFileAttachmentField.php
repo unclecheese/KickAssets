@@ -13,7 +13,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 	
 	/**
 	 * @var boolean A simple template variable that states whether this is a multiple
-			 		upload field or not
+	 *	 		upload field or not
 	 */	
 	public $Multi = true;
 	
@@ -63,7 +63,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 			$files = new DataObjectSet();
 			if($set = DataObject::get("File", "\"File\".ID IN (".implode(',',$ids).")")) {
 				foreach($set as $file) {
-					self::process_file($file);
+					$this->processFile($file);
 					$files->push($file);					
 				}
 				$files->merge($this->Files());
@@ -94,7 +94,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 				if($files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($list).")")) {
 					$ret = new DataObjectSet();
 					foreach($files as $file) {
-						self::process_file($file);
+						$this->processFile($file);
 						$ret->push($file);
 					}
 					return $ret;
