@@ -301,11 +301,15 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	 * @return SS_HTTPResponse
 	 */
 	public function move(SS_HTTPRequest $r) {
-		if($r->requestVar('source') && is_array($r->requestVar('source')) && $r->requestVar('dest')) {    
+		$destinationFolderID = $r->requestVar('dest');
+		if($r->requestVar('source') && is_array($r->requestVar('source')) && $destinationFolderID) {    
 			foreach($r->requestVar('source') as $id) {
+				if ($id == $destinationFolderID) continue;
 				if($file = DataObject::get_by_id("File", (int) $id)) {
-					$file->ParentID = $r->requestVar('dest');
-					$file->write();
+					if ($file->ParentID != $destinationFolderID) {
+						$file->ParentID = $destinationFolderID;
+						$file->write();
+					}
 				}
 			}
 			return $this->browse($r);
