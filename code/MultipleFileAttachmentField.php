@@ -120,11 +120,12 @@ class MultipleFileAttachmentField extends KickAssetField {
 		if(!$file_class = $this->getFileClass($record)) {
 			return false;
 		}
+		// Null out all the existing relations and reset.
+		$currentComponentSet = $record->{$this->name}();
+		$currentComponentSet->removeAll();
+
 		if(isset($_REQUEST[$this->name]) && is_array($_REQUEST[$this->name])) {
 			if($relation_name = $this->getForeignRelationName($record)) {
-				// Null out all the existing relations and reset.
-				$currentComponentSet = $record->{$this->name}();
-				$currentComponentSet->removeAll();
 				// Assign all the new relations (may have already existed)
 				foreach($_REQUEST[$this->name] as $id) {
 					if($file = DataObject::get_by_id("File", $id)) {

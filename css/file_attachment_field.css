@@ -38,7 +38,7 @@ font-weight:bold;
 .FileAttachmentField .file_drop.over {border-color:#666;}
 .right .FileAttachmentField h3 {color:#666;font-size:14px;font-weight:normal;margin-bottom:5px;}
 .FileAttachmentField .file_drop {width:80px;height:80px;padding:0;position:relative;color:#666;float:left;margin:0;background-repeat:no-repeat;background-position:center;}
-.FileAttachmentField.multi .file_drop {font-size:18px;text-align:center;padding-top:20px;height:80px;}
+
 .FileAttachmentField.single .file_drop.empty {background-image:url(../images/drop.png) !important;}
 .FileAttachmentField .attached_files {}
 .FileAttachmentField.single .attached_files .detach_btn {display:block;width:auto;}
@@ -50,10 +50,15 @@ font-weight:bold;
 .FileAttachmentField.single .file_info {padding-top:10px;}
 .FileAttachmentField .file_name {font-size:12px;margin:5px 0;}
 
-
-.FileAttachmentField.multi .file_name {max-height:200px;overflow:auto;}
-.FileAttachmentField.multi .file_block {position:relative;background:#ddd;padding:3px 6px;margin:4px 0;}
-.FileAttachmentField.multi .file_block .detach_btn {position:absolute;right:10px;display:block;height:16px;width:16px;text-indent:-9999em;background:url(../images/remove.png);;top:5px;}
+.FileAttachmentField.multi .multi_actions {float:right;padding-top:6px;letter-spacing:3px;}
+.FileAttachmentField.multi .multi_actions a:hover {background:transparent;}
+.FileAttachmentField.multi .file_block .name,
+.FileAttachmentField.multi .file_block .size {vertical-align:50%}
+.FileAttachmentField.multi .file_block .name {font-size:12px;}
+.FileAttachmentField.multi .file_block {background:#ddd;margin-bottom:6px;padding:4px 8px;}
+.FileAttachmentField.multi .file_block .thumb {margin-right:10px;}
+.FileAttachmentField.multi .multi_add_files {border-bottom:1px solid #ccc;}
+.FileAttachmentField.multi .file_drop {font-size:18px;text-align:center;padding-top:20px;height:60px;}
 .progress_wrap {height:10px;border:1px solid #ccc;padding:3px;visibility:hidden;margin:4px 0;width:300px;-moz-border-radius:10px;-webkit-border-radius:10px;}
 .progress {height:10px;width:0px;background:rgb(96,171,213);-moz-border-radius:5px;-webkit-border-radius:5px;}
 

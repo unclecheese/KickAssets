@@ -10,6 +10,7 @@ $(function() {
 			'padding'			: 0,
 	        'transitionIn'		: 'none',
 			'transitionOut'		: 'none',
+			'titleShow'			: false,
 			'type'				: 'iframe',
 			'onStart'			: function(btn) {
 				$parentField = $(btn).closest('.FileAttachmentField');
@@ -18,7 +19,15 @@ $(function() {
 				var ids = $('#fancybox-frame').contents().find('#selected_files').text();
 				if(!ids.length) return;
 				
-				$parentField.closest('.FileAttachmentField').find('.attached_files').load(
+				var $wrap = $parentField.closest('.FileAttachmentField');
+				// make sure we don't lose any unsaved files.
+				if($wrap.is('.multi')) {
+					$wrap.find('.file_block').each(function() {
+						ids += ',';
+						ids += $(this).find(':hidden').val();
+					})
+				}
+				$wrap.find('.attached_files').load(
 					$parentField.attr('data-refreshlink'),
 					{ 'ids' : ids.split(',') }
 				);
