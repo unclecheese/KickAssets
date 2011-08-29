@@ -596,7 +596,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		$owner->setEmptyString('('._t('KickAssets.NONE','None').')');
 		$folders->setEmptyString('(root)');
 		if($file->hasMethod('updateCMSFields')) {
-			if(version_compare(PHP_VERSION, '5.3')) {
+			if(version_compare(PHP_VERSION, '5.3') >= 0) {
 				$file->updateCMSFields(&$fields);	
 			}
 			else {

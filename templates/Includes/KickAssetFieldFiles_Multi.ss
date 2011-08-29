@@ -25,7 +25,9 @@
 		<div id="progress"></div>
 	</div>
 	<h3 class="multi_add_files">Add files</h3>
-	
+	<div class="progress_wrap">
+		<div class="progress"></div>
+	</div>	
 	<div class="file_attach_buttons">
 		<span class="file-wrapper">
 		  <input multiple="multiple" type="file" name="upload" class="file_attach_upload" data-uploadurl="$UploadLink"/>
