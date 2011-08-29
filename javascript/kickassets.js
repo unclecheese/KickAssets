@@ -181,7 +181,7 @@ $(document).ready(function() {
 	
 	$('#directory_list li').livequery(function() {$(this).draggable({
 	  delay: 500,
-	  disatance: 30,
+	  distance: 30,
 	  helper: function(){
 	    var selected = $('#directory_list .ui-selected');
 	    if (selected.length === 0) {
