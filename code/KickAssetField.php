@@ -43,7 +43,7 @@ abstract class KickAssetField extends FormField {
 	 */
 	protected function processFile($file) {
 		if($file->ClassName == "Image" || is_subclass_of($file->ClassName, "Image")) {
-			if($thumb = $file->CroppedImage(32,32)) {
+			if($thumb = $file->CroppedImage(64,64)) {
 				$file->Thumb = $thumb->getURL();			
 			}
 		}

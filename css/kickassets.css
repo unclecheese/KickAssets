@@ -6,7 +6,9 @@
 #directory_list li.ui-selected .pad {background:#ddd;}
 #directory_list li.ui-selected span {background:rgb(56,117,215);color:white;-moz-border-radius:5px;-webkit-border-radius:5px;}
 #head {background:#ddd;padding:6px 0;color:#666;height:32px;width:100%;}
-#head h2 {width:60%;float:left;font-size:16px;line-height:32px;padding-left:10px;}
+#head h2 {width:60%;float:left;font-size:16px;line-height:32px;padding-left:10px;font-weight:normal;}
+#head h2 a {color:rgb(0,134,194);text-decoration:none;}
+#head h2 a:hover {text-decoration:underline;}
 #back {float:left;padding-left:10px;}
 #buttons {padding-right:10px;}
 #buttons a {float:right;margin-left:8px;}
@@ -20,17 +22,53 @@
 .editable input {border:0;text-align:center;display:block;width:150px;padding:0;}
 body {height:100%;width:100%;position:absolute;top:0;bottom:0;}
 
-a.button { font-size:11px;font-weight: bold; color: #333; text-decoration: none; display: block;padding:4px 20px;   margin-top:5px;-webkit-border-radius: 1.6em; -moz-border-radius: 1.6em;background:#ddd;border:1px solid #999;}
-a.button:hover {background:#ccc;}
-a.button.disabled {color:#999;border-color:#bbb;cursor:default;}
-a.button.disabled:hover {background:#ddd;}
+.button {
+  width:auto;
+  display: inline-block;
+  background-color: #e6e6e6;
+  background-repeat: no-repeat;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(0.25, #ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(#ffffff, color-stop(0.25, #ffffff), #e6e6e6);
+  background-image: -moz-linear-gradient(#ffffff, color-stop(#ffffff, 0.25), #e6e6e6);
+  padding: 4px 20px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  color: #333333;
+  font-size: 12px;
+  line-height: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -webkit-transition: 0.1s linear all;
+  -moz-transition: 0.1s linear all;
+  transition: 0.1s linear all;
+	text-decoration:none;
+	text-align:center;
+font-weight:bold;
+}
+.button:hover, .button.over {
+  background-position: 0 -15px;
+  color: #333333;
+   background:#ccc;
+  text-decoration: none;
+}
+.button.disabled {color:#999;cursor:default;}
+.button.disabled:hover {background-color:#e6e6e6;}
+.button.disabled img {opacity:0.5;}
+.button img {vertical-align:top;}
+span.file_upload_btn.button {}
+#edit_button img {height:12px;}
 
 
 #footer {clear:both;height:32px;background:#ccc;width:100%;padding:6px 0;visibility:hidden;}
-#search {width:200px;float:left;height:32px;}
+#search {width:200px;float:right;padding-right:10px;height:32px;}
 #search input {background:#fff url(../images/search.png) no-repeat 0 1px;border:1px solid #999;-moz-border-radius:15px;-webkit-border-radius:15px;margin:3px 0 0 10px;padding:4px 4px 4px 24px;color:#666;}
-#actions {width:480px;float:right;height:32px;}
-#actions .button {float:right;margin:4px 10px 0 0;}
+#actions {width:100%;float:right;height:32px;}
+#actions .button {float:right;margin:2px 10px 0 0;}
 #progress {width:50%;height:52px;background:blue;}
 #status {text-align:center;margin:0 200px 0 200px;}
 
@@ -93,6 +131,8 @@ a.button.disabled:hover {background:#ddd;}
 }
 
 
+
+
 #edit form {padding:10px 20px 58px 20px;}
 #edit form .text input {width:85%;-moz-border-radius:5px;-webkit-border-radius:5px;padding:5px 3px;color:#666;} 
 #edit form textarea {width:85%;color:#666;}
@@ -100,3 +140,28 @@ a.button.disabled:hover {background:#ddd;}
 
 #replace-file {margin:10px 0;border:1px dashed #ccc;-moz-border-radius:5px;-webkit-border-radius:5px;color:#666;padding:5px;width:85%;overflow:hidden;font-size:11px;}
 #replace-file.over {border-color:#999;}
+
+
+.file-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+  float:right;
+margin: 0;
+
+}
+
+.file-wrapper .file_upload_btn {width:auto;}
+.file-wrapper input {
+  cursor: pointer;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  filter: alpha(opacity=1);
+  -moz-opacity: 0.01;
+  opacity: 0.01;
+  font-size:100px;
+
+}

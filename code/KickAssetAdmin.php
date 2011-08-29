@@ -303,6 +303,8 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	public function move(SS_HTTPRequest $r) {
 		if($r->requestVar('source') && is_array($r->requestVar('source')) && $r->requestVar('dest')) {    
 			foreach($r->requestVar('source') as $id) {
+				if($id == $r->requestVar('dest')) continue;
+				
 				if($file = DataObject::get_by_id("File", (int) $id)) {
 					$file->ParentID = $r->requestVar('dest');
 					$file->write();
@@ -480,6 +482,29 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	}
 	
 	
+	/**
+	 * Generate linked breadcrumbs for the folder hierarchy
+	 *
+	 * @return string
+	 */
+	public function BreadCrumbs() {
+		$folder = $this->currentFolder;
+		$breadcrumbs = array();
+		while($folder->ID) {
+			$breadcrumbs[$folder->Name] = $this->Link($this->getBrowseAction()."/".$folder->ID);
+			$folder = $folder->Parent();
+		}
+		$breadcrumbs[ASSETS_DIR] = $this->Link($this->getBrowseAction()."/0");
+		$list = array_reverse($breadcrumbs);
+		$ret = "";
+		foreach($list as $name => $link) {
+			$ret .= " / <a href='$link'>$name</a>";
+		}
+		return substr_replace($ret, "",0,3);
+		
+	}
+	
+	
 	
 	/**
 	 * Generate a link to upload to this controller
@@ -571,7 +596,13 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		$owner->setEmptyString('('._t('KickAssets.NONE','None').')');
 		$folders->setEmptyString('(root)');
 		if($file->hasMethod('updateCMSFields')) {
-			$file->updateCMSFields($fields);
+			if(version_compare(PHP_VERSION, '5.3')) {
+				$file->updateCMSFields(&$fields);	
+			}
+			else {
+				$file->updateCMSFields($fields);	
+			}
+			
 		}
 		return $fields;
 	}
