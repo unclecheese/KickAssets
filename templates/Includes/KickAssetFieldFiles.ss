@@ -22,8 +22,6 @@
 		<div class="progress"></div>
 	</div>
 	<div class="file_attach_buttons">
-
-
 			<div class="controls_no_file" <% if File %>style="display:none;"<% end_if %>>
 				<span class="file-wrapper">
 				  <input type="file" name="upload" class="file_attach_upload" data-uploadurl="$UploadLink"/>
@@ -43,6 +41,7 @@
 				<% end_control %>
 				<% end_if %>
 			</div>
+
 
 	</div>
 

@@ -1,4 +1,10 @@
-<ul id="directory_list">
+<ul id="directory_list" class="gallery">
+<li class="head">
+	<span class="pad">&nbsp;</span>
+	<span class="filename"><% _t('KickAssets.NAME','Name') %></span>
+	<span class="path"><% _t('KickAssets.FILENAME','Filename') %></span>
+	<span class="size"><% _t('KickAssets.SIZE','Size') %></span>
+</li>
 <% if Folders %>
 <% control Folders %>
 	<li class="folder" data-id="$Item.ID" data-link="$Link">
