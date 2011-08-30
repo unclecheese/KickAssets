@@ -193,7 +193,7 @@ $(document).ready(function() {
 	  }
 	});});
 	
-	$('#directory_list li img').live("click", function(event) {
+	$('#directory_list.gallery li img, #directory_list.grid li').live("click", function(event) {
 		if(!event.metaKey) {
 			$('.ui-selected').removeClass('ui-selected');
 			$(this).closest('li').addClass('ui-selected');			
@@ -247,14 +247,20 @@ $(document).ready(function() {
 	});});
 	
 	
+	$('li:not(.head)').each(function(i,e) {
+		if(i % 2 == 1) {
+			$(e).addClass('even');
+		}
+	});
+	
 	
 	var timeout;
 	$('#search input').keyup(function() {
 		if(timeout) window.clearTimeout(timeout);
 		s = $(this).val();		
 		timeout = window.setTimeout(function() {
-			$('#directory_list li').hide();
-			$('#directory_list li').each(function() {
+			$('#directory_list li:not(.head)').hide();
+			$('#directory_list li:not(.head)').each(function() {
 				reg = new RegExp(s,"i");
 				if($(this).find('.filename').text().match(reg)) {
 					$(this).show();
@@ -366,7 +372,8 @@ $(document).ready(function() {
 	}	
 	
 	
-	$('.file img').live("dblclick", function() {
+	$('.file img, .grid .file').live("dblclick", function(e) {
+		if($(e.target).is('.editable')) return;
 		var $t = $(this).closest('li');
 		$('#edit').load(
 			$('base').attr('href')+"admin/files/editfile/"+$('#drop').data('folderid')+"/"+$t.data('id'),
@@ -375,7 +382,8 @@ $(document).ready(function() {
 
 	});
 	
-	$('.folder img').live('dblclick', function() {
+	$('.folder img, .grid .folder').live('dblclick', function(e) {
+		if($(e.target).is('.editable')) return;
 		var $t = $(this).closest('li');
 		window.location.href = $t.data('link');
 		return false;
