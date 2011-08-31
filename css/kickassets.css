@@ -71,7 +71,7 @@ span.file_upload_btn.button {}
 #footer {clear:both;height:32px;background:#ccc;width:100%;padding:6px 0;visibility:hidden;}
 #search {width:200px;float:right;padding-right:10px;height:32px;}
 #search input {background:#fff url(../images/search.png) no-repeat 0 1px;border:1px solid #999;-moz-border-radius:15px;-webkit-border-radius:15px;margin:3px 0 0 10px;padding:4px 4px 4px 24px;color:#666;}
-#actions {width:100%;float:right;height:32px;}
+#actions {width:75%;float:right;height:32px;}
 #actions .button {float:right;margin:2px 10px 0 0;}
 #progress {width:50%;height:52px;background:blue;}
 #status {text-align:center;margin:0 200px 0 200px;}
@@ -174,16 +174,17 @@ margin: 0;
 #directory_list li .path,
 #directory_list li .size {display:none;}
 #directory_list.grid {}
-#directory_list.grid li {float:none;overflow:hidden;height:auto;padding:0px 4px;margin:2px 0;width:100%;}
+#directory_list.grid li {float:none;overflow:hidden;height:auto;padding:0px 4px;margin:2px 0;width:100%;cursor:pointer;}
 #directory_list.grid li .pad {float:left;padding:0;text-align:left;}
 #directory_list.grid li .pad img {height:16px;width:16px;}
 #directory_list.grid li span {float:left;text-align:left;}
 #directory_list.grid .pad {width:24px;margin:0;}
-#directory_list.grid .filename {float:left;width:40%;}
+#directory_list.grid .filename {float:left;width:40%;cursor:text;}
 #directory_list.grid .path {width:40%;display:block;float:left;}
 #directory_list.grid .size {text-align:left;width:10%;display:block;float:left;}
 #directory_list.grid .head {display:block;font-weight:bold;background:rgb(244,244,244);}
-#directory_list.grid .head {padding:2px 4px;}
+#directory_list.grid .head {padding:4px 4px;}
+#directory_list.grid .head span {font-size:14px;}
 #directory_list.grid .head .pad {background:#fff;width:0;}
 #directory_list.grid .head .filename {margin-right:24px;}
 
@@ -193,3 +194,9 @@ margin: 0;
 #directory_list.grid li.ui-selected {background:rgb(56,117,215);}
 #directory_list.grid .editable input {border:0;text-align:left;display:block;width:150px;padding:0;margin-top:2px;}
 #directory_list.grid li.ui-selected span {background:rgb(56,117,215);color:white;border:0;-moz-border-radius:0;}
+
+#view {padding-left:10px;padding:7px 0 0 10px;width:120px;float:left;}
+#view span {float:left;color:#666;margin-right:10px;}
+#view a {float:left;margin-right:10px;}
+#view a:hover {border-bottom:3px solid #999;}
+#view a.current {border-bottom:3px solid #666;}

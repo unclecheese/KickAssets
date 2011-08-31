@@ -40,7 +40,8 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		'delete',
 		'editfile',
 		'FileEditForm',
-		'replace'
+		'replace',
+		'updateview'
 	);
 	
 	
@@ -351,6 +352,25 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 			))->renderWith('EditFields');
 		}
 	}
+	
+	
+	
+	/**
+	 * Changes the layout of the files. Store in session so it persists throughout
+	 * other implementations of this window, e.g. {@link FileAttachmentField}
+	 *
+	 * @param SS_HTTPRequest
+	 */
+	public function updateview(SS_HTTPRequest $r) {
+		if($r->requestVar('view') == "grid") {
+			Session::set("KickAssetAdmin.VIEW","grid");
+
+		}
+		elseif($r->requestVar('view') == "gallery") {
+			Session::set("KickAssetAdmin.VIEW","gallery");
+		}
+		return new SS_HTTPResponse(Session::get("KickAssetAdmin.VIEW"),200);		
+	}
 
 	
 
@@ -515,6 +535,29 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		return Director::absoluteBaseURL().$this->Link('upload/'.$this->getCurrentFolderID());
 	}
 	
+	
+	public function GalleryLink() {
+		return Controller::join_links($this->Link(),'updateview', '?view=gallery');
+	}
+
+
+	public function GridLink() {
+		return Controller::join_links($this->Link(),'updateview', '?view=grid');
+	}
+	
+	
+	
+	public function CurrentView($view) {
+		return $view == $this->View();
+	}
+	
+	
+	public function View() {
+		if($view = Session::get("KickAssetAdmin.VIEW")) {
+			return $view;
+		}
+		return "gallery";
+	}
 
 	
 	/**

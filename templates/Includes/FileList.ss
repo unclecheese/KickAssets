@@ -1,4 +1,4 @@
-<ul id="directory_list" class="gallery">
+<ul id="directory_list" class="$View">
 <li class="head">
 	<span class="pad">&nbsp;</span>
 	<span class="filename"><% _t('KickAssets.NAME','Name') %></span>

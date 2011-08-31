@@ -491,7 +491,18 @@ $(document).ready(function() {
 	});
 	
 	
-	
+	$('#view a').click(function() {
+		var $t = $(this);
+		$.post(
+			$t.attr('href'),
+			function(response) {
+				$('#view a').removeClass('current');
+				$('#view .'+response).addClass('current');
+				$('#directory_list').attr('class', response);
+			}
+		);
+		return false;		
+	});
 
 
 

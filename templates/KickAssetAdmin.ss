@@ -23,6 +23,11 @@
 		</div>
 		
 		<div id="footer">
+			<div id="view">
+				<span><% _t('KickAssetAdmin.VIEW','View') %>:</span>
+				<a class="gallery <% if CurrentView(gallery) %>current<% end_if %>" href="$GalleryLink" title="<% _t('KickAssetAdmin.GALLERY','Gallery') %>"><img src="kickassets/images/gallery.png" alt="gallery" height="16"/></a>
+				<a class="grid <% if CurrentView(grid) %>current<% end_if %>" href="$GridLink" <% if CurrentView(grid) %>class="current"<% end_if %> title="<% _t('KickAssetAdmin.GRID','Grid') %>"><img src="kickassets/images/grid.png" alt="grid" height="16" /></a>
+			</div>
 			<div id="actions">
 				<% if SelectMode %>
 					<a class="button disabled togglestate" id="attach" href="javascript:void(0);"><img src="kickassets/images/check.png" height="16" /> <% _t('KickAssetAdmin.ATTACHFILES','Attach selected file(s)') %></a>

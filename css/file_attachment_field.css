@@ -1,14 +1,14 @@
-.btn {
+.file_attach_btn,.FileAttachmentField.single .detach_btn {
   display: inline-block;
   background-color: #e6e6e6;
   background-repeat: no-repeat;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(0.25, #ffffff), to(#e6e6e6));
   background-image: -webkit-linear-gradient(#ffffff, color-stop(0.25, #ffffff), #e6e6e6);
   background-image: -moz-linear-gradient(#ffffff, color-stop(#ffffff, 0.25), #e6e6e6);
-  padding: 4px 10px;
+  padding: 4px 14px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   color: #333333;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 18px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-bottom-color: rgba(0, 0, 0, 0.25);
@@ -21,67 +21,34 @@
   -webkit-transition: 0.1s linear all;
   -moz-transition: 0.1s linear all;
   transition: 0.1s linear all;
-	text-decoration:none;
-	width:200px;
-	text-align:center;
-font-weight:bold;
+text-decoration:none;
+width:200px;
+text-align:center;
 }
-.btn:hover, .btn.over {
+.file_attach_btn:hover,.FileAttachmentField.single .detach_btn:hover {
   background-position: 0 -15px;
   color: #333333;
-   background:#ccc;
   text-decoration: none;
 }
-.btn img {vertical-align:top;}
-.FileAttachmentField {background:#eee;width:600px;overflow:hidden;padding:10px;}
+.FileAttachmentField {background:#eee;width:550px;overflow:hidden;padding:10px;}
 .file_drop {border:3px dashed #ccc;-moz-border-radius:5px;-webkit-border-radius:5px;}
 .FileAttachmentField .file_drop.over {border-color:#666;}
-.right .FileAttachmentField h3 {color:#666;font-size:14px;font-weight:normal;margin-bottom:5px;}
-.FileAttachmentField .file_drop {width:80px;height:80px;padding:0;position:relative;color:#666;float:left;margin:0;background-repeat:no-repeat;background-position:center;}
-
+.FileAttachmentField h3 {color:#666;}
+.FileAttachmentField .file_drop {width:100px;height:100px;padding:0;position:relative;color:#666;float:left;margin:0;background-repeat:no-repeat;background-position:center;}
+.FileAttachmentField.multi .file_drop {font-size:18px;text-align:center;padding-top:20px;height:80px;}
 .FileAttachmentField.single .file_drop.empty {background-image:url(../images/drop.png) !important;}
 .FileAttachmentField .attached_files {}
 .FileAttachmentField.single .attached_files .detach_btn {display:block;width:auto;}
 .FileAttachmentField .file_attach_buttons {}
-.FileAttachmentField .file_attach_buttons a,
-.FileAttachmentField .file_attach_buttons .file-wrapper {margin-right:5px;width:auto;float:left;}
+.FileAttachmentField .file_attach_buttons a {margin-right:10px;width:auto;float:left;}
 
-.FileAttachmentField .file_info {margin-left:100px;}
+.FileAttachmentField .file_info {margin-left:120px;}
 .FileAttachmentField.single .file_info {padding-top:10px;}
 .FileAttachmentField .file_name {font-size:12px;margin:5px 0;}
 
-.FileAttachmentField.multi .multi_actions {float:right;padding-top:6px;letter-spacing:3px;}
-.FileAttachmentField.multi .multi_actions a:hover {background:transparent;}
-.FileAttachmentField.multi .file_block .name,
-.FileAttachmentField.multi .file_block .size {vertical-align:50%}
-.FileAttachmentField.multi .file_block .name {font-size:12px;}
-.FileAttachmentField.multi .file_block {background:#ddd;margin-bottom:6px;padding:4px 8px;}
-.FileAttachmentField.multi .file_block .thumb {margin-right:10px;}
-.FileAttachmentField.multi .multi_add_files {border-bottom:1px solid #ccc;}
-.FileAttachmentField.multi .file_drop {font-size:18px;text-align:center;padding-top:20px;height:60px;}
-.progress_wrap {height:10px;border:1px solid #ccc;padding:3px;visibility:hidden;margin:4px 0;width:300px;-moz-border-radius:10px;-webkit-border-radius:10px;}
-.progress {height:10px;width:0px;background:rgb(96,171,213);-moz-border-radius:5px;-webkit-border-radius:5px;}
 
-
-.file-wrapper {
-  cursor: pointer;
-  display: inline-block;
-  overflow: hidden;
-  position: relative;
-  float:left;
-
-}
-
-.file-wrapper .file_upload_btn {width:auto;}
-.file-wrapper input {
-  cursor: pointer;
-  height: 100%;
-  position: absolute;
-  right: 0;
-  top: 0;
-  filter: alpha(opacity=1);
-  -moz-opacity: 0.01;
-  opacity: 0.01;
-  font-size:100px;
-
-}
+.FileAttachmentField.multi .file_name {max-height:200px;overflow:auto;}
+.FileAttachmentField.multi .file_block {position:relative;background:#ddd;padding:3px 6px;margin:4px 0;}
+.FileAttachmentField.multi .file_block .detach_btn {position:absolute;right:10px;display:block;height:16px;width:16px;text-indent:-9999em;background:url(../images/remove.png);;top:5px;}
+#progress_wrap {height:10px;border:1px solid #ccc;padding:3px;visibility:hidden;margin:4px 0;width:300px;-moz-border-radius:10px;-webkit-border-radius:10px;}
+#progress {height:10px;width:0px;background:rgb(96,171,213);-moz-border-radius:5px;-webkit-border-radius:5px;}
