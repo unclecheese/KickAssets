@@ -59,7 +59,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 	 */	
 	public function refresh(SS_HTTPRequest $r) {
 		if($r->requestVar('ids')) {
-			$ids = $r->requestVar('ids');
+			$ids = array_unique($r->requestVar('ids'));
 			$files = new DataObjectSet();
 			if($set = DataObject::get("File", "\"File\".ID IN (".implode(',',$ids).")")) {
 				foreach($set as $file) {
@@ -67,6 +67,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 					$files->push($file);					
 				}
 				$files->merge($this->Files());
+				$files->removeDuplicates();
 			}
 			else {
 				die("File $id doesn't exist");
