@@ -33,7 +33,9 @@
 		  <input multiple="multiple" type="file" name="upload" class="file_attach_upload" data-uploadurl="$UploadLink"/>
 		  <span class="file_upload_btn btn"><img src="kickassets/images/upload.png" height="16" /> <% _t('FileAttachmentField.FROMYOURCOMPUTER','From your computer') %></span>
 		</span>
-		<a href="$BrowseLink" class="file_attach_btn btn"><img src="kickassets/images/cloud.png" height="16" /> <% _t('FileAttachmentField.FROMFILES','From files') %></a>		
+		<% if ExistingFileSelection %>
+			<a href="$BrowseLink" class="file_attach_btn btn"><img src="kickassets/images/cloud.png" height="16" /> <% _t('FileAttachmentField.FROMFILES','From files') %></a>		
+		<% end_if %>
 	</div>
 
 </div>

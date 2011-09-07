@@ -33,7 +33,13 @@ abstract class KickAssetField extends FormField {
 	 *				when the list changes.
 	 */	
 	public $AttachedFilesTemplate;
+	
 		
+	
+	/**
+	 * @var boolean Allow browsing of existing files (vs upload only)
+	 */
+	public $ExistingFileSelection = true;
 	
 	
 	/**
@@ -163,6 +169,16 @@ abstract class KickAssetField extends FormField {
 	 */
 	public function UploadLink() {
 		return $this->Link('upload');
+	}
+	
+	
+	
+	/**
+	 * Turns off the existing file selection (popup)
+	 *
+	 */
+	public function disableExistingFileSelection() {
+		$this->ExistingFileSelection = false;		
 	}
 	
 		

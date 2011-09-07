@@ -27,14 +27,18 @@
 				  <input type="file" name="upload" class="file_attach_upload" data-uploadurl="$UploadLink"/>
 				  <span class="file_upload_btn btn"><img src="kickassets/images/upload.png" height="16" /> <% _t('FileAttachmentField.FROMYOURCOMPUTER','From your computer') %></span>
 				</span>
-				<a href="$BrowseLink" class="file_attach_btn btn"><img src="kickassets/images/cloud.png" height="16" /> <% _t('FileAttachmentField.FROMFILES','From files') %></a>
+				<% if ExistingFileSelection %>
+					<a href="$BrowseLink" class="file_attach_btn btn"><img src="kickassets/images/cloud.png" height="16" /> <% _t('FileAttachmentField.FROMFILES','From files') %></a>
+				<% end_if %>
 				<a style="display:none;" href="javascript:void(0);" class="file_cancel_btn btn"><img src="kickassets/images/cancel.png" height="16" /> <% _t('FileAttachmentField.CANCEL','Cancel') %></a>
 			</div>
 			<div class="controls_has_file" <% if File %><% else %>style="display:none;"<% end_if %>>
 				<% if File %>
 				<% control File %>
 					<a href="javascript:void(0);" class="replace_btn btn" data-id="$ID"><img src="kickassets/images/replace.png" height="16" /> <% _t('FileAttachmentField.REPLACE','Replace') %></a>
-					<a href="$EditLink" class="file_attach_btn btn" data-id="$ID"><img src="kickassets/images/edit.png" height="16" /> <% _t('FileAttachmentField.EDIT','Edit') %></a>
+					<% if ExistingFileSelection %>
+						<a href="$EditLink" class="file_attach_btn btn" data-id="$ID"><img src="kickassets/images/edit.png" height="16" /> <% _t('FileAttachmentField.EDIT','Edit') %></a>
+					<% end_if %>
 					<a href="javascript:void(0);" class="detach_btn btn" data-id="$ID"><img src="kickassets/images/remove.png" height="16" /> <% _t('FileAttachmentField.REMOVE','Remove') %></a>
 					<a href="$RemoveLink" class="delete_btn btn" data-id="$ID" data-confirmtext="<% _t('FileAttachmentField.AREYOUSURE','Are you sure you want to delete this file permanently?') %>"><img src="kickassets/images/delete.png" height="16" /> <% _t('FileAttachmentField.DELETEFROMFILES','Delete from files') %></a>
 					<input type="hidden" name="{$Top.Name}ID" value="$ID" />
