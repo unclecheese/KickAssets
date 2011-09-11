@@ -21,6 +21,7 @@ $lang['de_DE']['KickAssetAdmin']['GALLERY'] = 'Galerie';
 $lang['de_DE']['KickAssetAdmin']['GRID'] = 'Raster';
 $lang['de_DE']['KickAssetAdmin']['NEWFOLDER'] = 'Neuer Ordner';
 $lang['de_DE']['KickAssetAdmin']['VIEW'] = 'Ansehen';
+$lang['de_DE']['KickAssetAdmin']['Browse'] = 'Durchsuchen...';
 $lang['de_DE']['KickAssets']['FILENAME'] = 'Dateiname';
 $lang['de_DE']['KickAssets']['MOVETOFOLDER'] = 'In Ordner verschieben';
 $lang['de_DE']['KickAssets']['NAME'] = 'Name';
