@@ -3,7 +3,7 @@
 	<head>
 		<% base_tag %>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Files and Images</title>
+		<title><% _t('AssetAdmin.MENUTITLE','Files & Images') %></title>
 	</head>
 	<body>
 		
