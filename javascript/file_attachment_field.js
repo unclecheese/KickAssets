@@ -182,7 +182,7 @@ $(function() {
 
 	};
 	
-	$('.file_drop').livequery(dnd.ready());
+	$('.file_drop').livequery(dnd.ready);
 
 })
 })(jQuery);
