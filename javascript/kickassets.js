@@ -409,7 +409,13 @@ $(document).ready(function() {
 	
 	$('#edit_button').click(function() {
 		if(!$(this).is('.disabled')) {
-			$('.ui-selected:first').dblclick();
+			if($('#directory_list').is('.grid')) {
+				$('.ui-selected:first').dblclick();	
+			}
+			else {
+				$('.ui-selected:first img').dblclick();
+			}
+			
 		}
 		return false;
 	});
