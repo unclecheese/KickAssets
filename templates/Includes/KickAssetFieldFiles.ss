@@ -39,8 +39,8 @@
 					<% if ExistingFileSelection %>
 						<a href="$EditLink" class="file_attach_btn btn" data-id="$ID"><img src="kickassets/images/edit.png" height="16" /> <% _t('FileAttachmentField.EDIT','Edit') %></a>
 					<% end_if %>
-					<a href="javascript:void(0);" class="detach_btn btn" data-id="$ID"><img src="kickassets/images/remove.png" height="16" /> <% _t('FileAttachmentField.REMOVE','Remove') %></a>
-					<a href="$RemoveLink" class="delete_btn btn" data-id="$ID" data-confirmtext="<% _t('FileAttachmentField.AREYOUSURE','Are you sure you want to delete this file permanently?') %>"><img src="kickassets/images/delete.png" height="16" /> <% _t('FileAttachmentField.DELETEFROMFILES','Delete from files') %></a>
+					<a href="javascript:void(0);" class="detach_btn btn" data-id="$ID"><img src="kickassets/images/remove.png" height="16" /> <% _t('FileAttachmentField.DETACH','Detach') %></a>
+					<a href="$RemoveLink" class="delete_btn btn" data-id="$ID" data-confirmtext="<% _t('FileAttachmentField.AREYOUSURE','Are you sure you want to delete this file permanently?') %>"><img src="kickassets/images/delete.png" height="16" /> <% _t('FileAttachmentField.DELETEPERMANENTLY','Delete permanently') %></a>
 					<input type="hidden" name="{$Top.Name}ID" value="$ID" />
 				<% end_control %>
 				<% end_if %>
