@@ -3,7 +3,7 @@
 	<head>
 		<% base_tag %>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Files and Images</title>
+		<title><% _t('AssetAdmin.MENUTITLE','Files & Images') %></title>
 	</head>
 	<body>
 		
@@ -34,8 +34,8 @@
 					<div id="selected_files"></div>
 				<% end_if %>
 
-				<a class="button disabled togglestate single" id="edit_button" href="javascript:void(0);"><img src="kickassets/images/edit.png" height="16" /> Edit</a>				
-				<a class="button disabled togglestate" data-confirmtext="<% _t('KickAssetAdmin.DELETEFILES','Are you sure you want to delete the selected file(s)?') %>" id="delete" href="$DeleteLink"><img src="kickassets/images/delete.png" height="16" /> Delete</a>				
+				<a class="button disabled togglestate single" id="edit_button" href="javascript:void(0);"><img src="kickassets/images/edit.png" height="16" /> <% _t('KickAssetAdmin.EDIT','Edit') %></a>				
+				<a class="button disabled togglestate" data-confirmtext="<% _t('KickAssetAdmin.DELETEFILES','Are you sure you want to delete the selected file(s)?') %>" id="delete" href="$DeleteLink"><img src="kickassets/images/delete.png" height="16" /> <% _t('KickAssetAdmin.DELETE','Delete') %></a>				
 				<a class="button" id="newfolder" href="$NewFolderLink"><img src="kickassets/images/add.png" height="16" /> <% _t('KickAssetAdmin.NEWFOLDER','New Folder') %></a>				
 				<span class="file-wrapper">
 				  <input type="file" name="upload" class="file_attach_upload" multiple="multiple" />
