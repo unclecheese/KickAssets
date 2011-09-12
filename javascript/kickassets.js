@@ -121,6 +121,13 @@ $(document).ready(function() {
 //	$('#drop').css('height',$('body').height()-20+'px');
 	var toRename;
 	
+	$('#filesystemsync').click(function() {
+		$.get($(this).attr('href'), function(data) {
+			apprise(data);
+		});
+		return false;
+	});
+	
 	$('#newfolder').click(function() {
 		var $t = $(this);
 		$('#drop').load($t.attr('href'));
