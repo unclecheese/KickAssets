@@ -327,6 +327,12 @@ $(document).ready(function() {
 		else {
 			$('#drop').css('width', $(window).width()-10+'px');
 		}
+		if($(window).width() < 1000) {
+			$('body').addClass('small');
+		}
+		else {
+			$('body').removeClass('small');
+		}
 	};
 	
 	
