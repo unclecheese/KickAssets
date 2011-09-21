@@ -1,7 +1,7 @@
 var $parentField;
 
 (function($) {
-$(function() {
+$(document).ready(function() {{
 	$('.file_attach_btn').livequery(function() {
 		$(this).fancybox({
 			'width'				: '90%',
