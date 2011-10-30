@@ -61,7 +61,12 @@ class MultipleFileAttachmentField extends KickAssetField {
 		if($r->requestVar('ids')) {
 			$ids = array_unique($r->requestVar('ids'));
 			$files = new DataObjectSet();
-			if($set = DataObject::get("File", "\"File\".ID IN (".implode(',',$ids).")")) {
+			// Added to fix problem whee sometimes and even often a comma is put in the fron of the string 
+			// when implode is run on $ids. Uses a regular express that should leave things along if 
+			// there is no preceeding coma. The coma breaks the sql if left in.
+			$implodestring = implode(',',$ids);
+			$implodestring = preg_replace("/^[,]/", "", $implodestring);
+			if($set = DataObject::get("File", "`ID` IN ($implodestring)")) {
 				foreach($set as $file) {
 					$this->processFile($file);
 					$files->push($file);					
