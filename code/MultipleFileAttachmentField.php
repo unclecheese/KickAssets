@@ -17,14 +17,23 @@ class MultipleFileAttachmentField extends KickAssetField {
 	 */	
 	public $Multi = true;
 	
-	
 
 	/**
 	 * @var string The template used to render the file list
 	 */
 	public $AttachedFilesTemplate = "KickAssetFieldFiles_Multi";	
 	
-
+	/**
+	 * @See Pull Request by Micah Sheets
+	 * FieldHolder overriden here so we can add javascript required for manymanysortable
+	 */
+	public function FieldHolder() {
+		if ($this->getForm()->getRecord()->hasExtension('ManyManySortable')){
+			Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/jquery-ui-1.8rc3.custom.js");
+			Requirements::javascript('kickassets/javascript/manymanysortable.js');
+		}
+		return parent::FieldHolder();
+	}
 
 	/**
 	 * Sets the value of the form field based on data from the request. Gets the list
@@ -48,8 +57,6 @@ class MultipleFileAttachmentField extends KickAssetField {
 		parent::setValue($value, $data);
 	}
 
-
-
 	/**
 	 * Refreshes the file list. If passed an array of IDs in the request, 
 	 * it augments the list with those files.
@@ -61,9 +68,6 @@ class MultipleFileAttachmentField extends KickAssetField {
 		if($r->requestVar('ids')) {
 			$ids = array_unique($r->requestVar('ids'));
 			$files = new DataObjectSet();
-			// Added to fix problem whee sometimes and even often a comma is put in the fron of the string 
-			// when implode is run on $ids. Uses a regular express that should leave things along if 
-			// there is no preceeding coma. The coma breaks the sql if left in.
 			$implodestring = implode(',',$ids);
 			$implodestring = preg_replace("/^[,]/", "", $implodestring);
 			if($set = DataObject::get("File", "`ID` IN ($implodestring)")) {
@@ -92,12 +96,22 @@ class MultipleFileAttachmentField extends KickAssetField {
 	 * Gets all the attached files.
 	 *
 	 * @return DataObjectSet
+	 * 
+	 * @See Modified for pull request by Micah Sheets to add manymanysortable.
 	 */
 	public function Files() {
+		$many_many_parent = $this->getForm()->getRecord();
 		if($val = $this->Value()) {
 			if(is_array($val)) {
 				$list = implode(',', $val);
-				if($files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($list).")")) {
+				
+				if ($many_many_parent->hasExtension('ManyManySortable')) {
+					$files = $many_many_parent->ManyManySorted();
+				}
+				else {
+					$files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($list).")");
+				}
+				if($files->Count() > 0) {
 					$ret = new DataObjectSet();
 					foreach($files as $file) {
 						$this->processFile($file);
@@ -117,6 +131,8 @@ class MultipleFileAttachmentField extends KickAssetField {
 	 * and rebuilds them, in order to accommodate any deletions.
 	 *
 	 * @param DataObject $record The record associated with the parent form
+	 * 
+	 * @See Modified for pull request by Micah Sheets to add manymanysortable
 	 */
 	public function saveInto(DataObject $record) {
 		// Can't do has_many without a parent id
@@ -133,11 +149,14 @@ class MultipleFileAttachmentField extends KickAssetField {
 		if(isset($_REQUEST[$this->name]) && is_array($_REQUEST[$this->name])) {
 			if($relation_name = $this->getForeignRelationName($record)) {
 				// Assign all the new relations (may have already existed)
-				foreach($_REQUEST[$this->name] as $id) {
+				$data = $_REQUEST;
+				for($count = 0; $count < count($data[$this->name]); ++$count) {
+					$id = $data[$this->name][$count];
+					$sort = $data['sort'][$count];
 					if($file = DataObject::get_by_id("File", $id)) {
 						$new = ($file_class != "File") ? $file->newClassInstance($file_class) : $file;
 						$new->write();
-						$currentComponentSet->add($new);
+						$currentComponentSet->add($new, array('ManyManySort'=>$sort));
 					}
 				}
 			}
