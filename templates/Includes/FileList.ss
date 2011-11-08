@@ -4,6 +4,7 @@
 	<span class="filename"><% _t('KickAssets.NAME','Name') %></span>
 	<span class="path"><% _t('KickAssets.FILENAME','Filename') %></span>
 	<span class="size"><% _t('KickAssets.SIZE','Size') %></span>
+	<span class="widthheight"><% _t('KickAssets.WIDTHHEIGHT','Size (px)') %></span>
 </li>
 <% if Folders %>
 <% control Folders %>
