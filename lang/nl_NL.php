@@ -39,6 +39,7 @@ $lang['nl_NL']['KickAssets']['PLEASEUPLOADONEFILE'] = 'Upload slechts 1 bestand 
 $lang['nl_NL']['KickAssets']['REPLACEFILE'] = 'Vervang bestand';
 $lang['nl_NL']['KickAssets']['SIZE'] = 'Afmeting';
 $lang['nl_NL']['KickAssets']['TITLE'] = 'Titel';
+$lang['nl_NL']['KickAssets']['WIDTHHEIGHT'] = 'Afmeting (px)';
 
 $lang['nl_NL']['KickAssetts']['CANCEL'] = 'Annuleren';
 $lang['nl_NL']['KickAssetts']['SAVE'] = 'Opslaan';
