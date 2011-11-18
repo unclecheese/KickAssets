@@ -4,15 +4,15 @@ global $lang;
 
 $lang['de_DE']['FileAttachmentField']['AREYOUSURE'] = 'Sollen wirklich alle Dateien dauerhaft gelöscht werden?';
 $lang['de_DE']['FileAttachmentField']['CANCEL'] = 'Abbrechen';
-$lang['de_DE']['FileAttachmentField']['DELETEFROMFILES'] = 'Lösche Dateien';
-$lang['de_DE']['FileAttachmentField']['DELETEPERMANENTLY'] = 'Löschen';
+$lang['de_DE']['FileAttachmentField']['DELETEFROMFILES'] = 'Datei Löschen';
+$lang['de_DE']['FileAttachmentField']['DELETEPERMANENTLY'] = 'Datei Löschen';
 $lang['de_DE']['FileAttachmentField']['DETACH'] = 'Trennen';
 $lang['de_DE']['FileAttachmentField']['DROPFILESHERE'] = 'Dateien hier ablegen';
 $lang['de_DE']['FileAttachmentField']['EDIT'] = 'Bearbeiten';
 $lang['de_DE']['FileAttachmentField']['FROMFILES'] = 'Aus Dateien';
 $lang['de_DE']['FileAttachmentField']['FROMYOURCOMPUTER'] = 'Vom Computer';
 $lang['de_DE']['FileAttachmentField']['NOFILESATTACHED'] = 'Keine Dateien angehängt';
-$lang['de_DE']['FileAttachmentField']['REMOVE'] = 'Löschen';
+$lang['de_DE']['FileAttachmentField']['REMOVE'] = 'Trennen';
 $lang['de_DE']['FileAttachmentField']['REPLACE'] = 'Ersetzen';
 $lang['de_DE']['FileAttachmentField']['UPLOADFILES'] = 'Dateien hochladen';
 $lang['de_DE']['KickAssetAdmin']['ATTACHFILES'] = 'Ausgewählte Datei(en) anhängen';
