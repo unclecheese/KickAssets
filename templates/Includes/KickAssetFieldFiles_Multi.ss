@@ -6,8 +6,11 @@
 
 	<div class="file_name">
 	<% if Files %>
+		<ul id="sortable">
 		<% control Files %>
+		<li class="sortableli" style="cursor: default;">
 			<div class="file_block">
+				<img class="fieldHandler" alt="Drag to rearrange order of fields" src="sapphire/images/drag.gif" style="cursor: move;">
 				<span class="thumb"><img src="$Thumb" height="24" /></span> <span class="name">$Name</span> <span class="size">($Size)</span>
 				<span class="multi_actions">
 				<a href="$EditLink" class="file_attach_btn" data-id="$ID" title="<% _t('FileAttachmentField.EDIT','Edit') %>"><img src="kickassets/images/edit.png" height="14" /></a>
@@ -15,8 +18,11 @@
 				<a href="$RemoveLink" class="delete_btn" data-confirmtext="<% _t('FileAttachmentField.AREYOUSURE','Are you sure you want to delete this file permanently?') %>"	 data-id="$ID" title="<% _t('FileAttachmentField.DELETEPERMANENTLY','Delete permanently') %>"><img src="kickassets/images/delete.png" height="14" /></a>
 				</span>
 				<input type="hidden" name="{$Top.Name}[]" value="$ID" />
+				<input type="hidden" class="sortHidden" name="sort[]" value="$POS" />
 			</div>
+		</li>
 		<% end_control %>
+		</ul>
 	<% else %>
 		<% _t('FileAttachmentField.NOFILESATTACHED','No files attached') %>
 	<% end_if %>
