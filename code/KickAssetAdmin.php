@@ -515,7 +515,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 			$folder = $folder->Parent();
 		}
 		$breadcrumbs[ASSETS_DIR] = $this->Link($this->getBrowseAction()."/0");
-		$list = array_reverse($breadcrumbs);
+		$list = array_reverse($breadcrumbs, true);
 		$ret = "";
 		foreach($list as $name => $link) {
 			$ret .= " / <a href='$link'>$name</a>";
