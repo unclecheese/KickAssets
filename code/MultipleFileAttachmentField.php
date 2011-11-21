@@ -3,6 +3,9 @@
  * Provides an interface for attaching multiple files associated with
  * a Page or DataObject. Files can be chosen from exting assets in {@link KickAssetAdmin}
  *
+ * To allow files managed using this interface to be sorted you must add the ManyManySortable Decorator to
+ * the DataObject that the relation ship is set on. See ManyManySortable.php for more information on how to do this.
+ *
  * @package KickAssets
  * @author UncleCheese <unclecheese@leftandmain.com>
  */
