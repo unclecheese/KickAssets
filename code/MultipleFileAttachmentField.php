@@ -3,9 +3,6 @@
  * Provides an interface for attaching multiple files associated with
  * a Page or DataObject. Files can be chosen from exting assets in {@link KickAssetAdmin}
  *
- * To allow files managed using this interface to be sorted you must add the ManyManySortable Decorator to
- * the DataObject that the relation ship is set on. See ManyManySortable.php for more information on how to do this.
- *
  * @package KickAssets
  * @author UncleCheese <unclecheese@leftandmain.com>
  */
@@ -153,16 +150,19 @@ class MultipleFileAttachmentField extends KickAssetField {
 			if($relation_name = $this->getForeignRelationName($record)) {
 				// Assign all the new relations (may have already existed)
 				$data = $_REQUEST;
-				//Debug::show($data);
 				for($count = 0; $count < count($data[$this->name]); ++$count) {
 					$id = $data[$this->name][$count];
 					if($file = DataObject::get_by_id("File", $id)) {
 						$new = ($file_class != "File") ? $file->newClassInstance($file_class) : $file;
+						$new->write();
 						if ($this->isSortable()){
 							$sort = $data['sort'][$count];
 							$currentComponentSet->add($new, array('ManyManySort'=>$sort));
 						}
-						$new->write();
+						else {
+							$currentComponentSet->add($new);
+						}
+						
 					}
 				}
 			}
