@@ -28,7 +28,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 	 * FieldHolder overriden here so we can add javascript required for manymanysortable
 	 */
 	public function FieldHolder() {
-		if ($this->getForm()->getRecord()->hasExtension('ManyManySortable')){
+		if ($this->isSortable()){
 			Requirements::javascript(SAPPHIRE_DIR ."/thirdparty/jquery-ui/jquery-ui-1.8rc3.custom.js");
 			Requirements::javascript('kickassets/javascript/manymanysortable.js');
 		}
@@ -105,7 +105,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 			if(is_array($val)) {
 				$list = implode(',', $val);
 				
-				if ($many_many_parent->hasExtension('ManyManySortable')) {
+				if ($this->isSortable()) {
 					$files = $many_many_parent->ManyManySorted();
 				}
 				else {
@@ -152,15 +152,21 @@ class MultipleFileAttachmentField extends KickAssetField {
 				$data = $_REQUEST;
 				for($count = 0; $count < count($data[$this->name]); ++$count) {
 					$id = $data[$this->name][$count];
-					$sort = $data['sort'][$count];
 					if($file = DataObject::get_by_id("File", $id)) {
 						$new = ($file_class != "File") ? $file->newClassInstance($file_class) : $file;
 						$new->write();
-						$currentComponentSet->add($new, array('ManyManySort'=>$sort));
+						if ($this->isSortable()){
+							$sort = $data['sort'][$count];
+							$currentComponentSet->add($new, array('ManyManySort'=>$sort));
+						}
+						else {
+							$currentComponentSet->add($new);
+						}
+						
 					}
 				}
 			}
-		}		
+		}
 	}
 
 
@@ -214,6 +220,10 @@ class MultipleFileAttachmentField extends KickAssetField {
 			$file_class = $many_class[1];
 		}
 		return $file_class;
+	}
+	
+	public function isSortable() {
+		return $this->getForm()->getRecord()->hasExtension('ManyManySortable');
 	}
 		
 

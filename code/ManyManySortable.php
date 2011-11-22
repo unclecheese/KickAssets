@@ -23,11 +23,6 @@
 class ManyManySortable extends DataObjectDecorator {
 	
 	static $many_many_sortable_relations = array();
-	static $sort_dir = "ASC";
-	
-	public static function set_sort_dir($dir) {
-		self::$sort_dir = $dir;
-	}
 	
 	/**
 	 * Used in _config to set up any many_many sortable relationships.
@@ -61,13 +56,9 @@ class ManyManySortable extends DataObjectDecorator {
 	
 	/**
 	 * Used in decorated classes to access the ManyManySorted objects.
-	 * 
-	 * @param string either 'ASC' or 'DESC'
-	 * 
 	 */
-	function ManyManySorted($sortdir = null) {
-		$sortDirection = ($sortdir) ? $sortdir : self::$sort_dir;
+	function ManyManySorted() {
 		$functionname = self::$many_many_sortable_relations[$this->owner->ClassName]['relationName'];
-		return $this->owner->$functionname(null, 'ManyManySort '.$sortDirection);
+		return $this->owner->$functionname(null, 'ManyManySort ASC'); // Sort order must not be changed or MultipleFileAttachmentField will no longer work properly.
 	}
 }
