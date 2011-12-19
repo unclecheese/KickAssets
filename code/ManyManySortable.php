@@ -36,11 +36,12 @@ class ManyManySortable extends DataObjectDecorator {
 	 * 			and the $value is the name of the relationship.
 	 */
 	public static function add_sortable_many_many_relations(array $classes) {
-		foreach($classes as $id => $value)
+		foreach($classes as $id => $value) {
 			$ownerClass = $id;
 			$componentName = $value;
 			DataObject::add_extension($ownerClass,'ManyManySortable');
 			self::add_sortable_many_many_relation($ownerClass,$componentName);
+		}
 	}
 	
 	/**
