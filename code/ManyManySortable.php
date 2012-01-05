@@ -36,11 +36,15 @@ class ManyManySortable extends DataObjectDecorator {
 	 * 			and the $value is the name of the relationship.
 	 */
 	public static function add_sortable_many_many_relations(array $classes) {
-		foreach($classes as $id => $value)
+		foreach($classes as $id => $keys) {
+			$keys = (array) $keys;
 			$ownerClass = $id;
-			$componentName = $value;
 			DataObject::add_extension($ownerClass,'ManyManySortable');
-			self::add_sortable_many_many_relation($ownerClass,$componentName);
+			foreach($keys as $value) {
+				$componentName = $value;
+				self::add_sortable_many_many_relation($ownerClass,$componentName);
+			}
+		}
 	}
 	
 	/**
@@ -56,7 +60,7 @@ class ManyManySortable extends DataObjectDecorator {
 	      $componentName => array(
 	        'ManyManySort' => 'Int'
 	     )));
-		 self::$many_many_sortable_relations[$ownerClass]['relationName'] = $componentName;
+		 self::$many_many_sortable_relations[$ownerClass][$componentName]['relationName'] = $componentName;
 	}
 	
 	/**
@@ -65,9 +69,9 @@ class ManyManySortable extends DataObjectDecorator {
 	 * @param string either 'ASC' or 'DESC'
 	 * 
 	 */
-	function ManyManySorted($sortdir = null) {
+	function ManyManySorted($sortdir = null, $componentName) {
 		$sortDirection = ($sortdir) ? $sortdir : self::$sort_dir;
-		$functionname = self::$many_many_sortable_relations[$this->owner->ClassName]['relationName'];
+		$functionname = self::$many_many_sortable_relations[$this->owner->ClassName][$componentName]['relationName'];
 		return $this->owner->$functionname(null, 'ManyManySort '.$sortDirection);
 	}
 }
