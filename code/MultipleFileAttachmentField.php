@@ -106,7 +106,7 @@ class MultipleFileAttachmentField extends KickAssetField {
 				$list = implode(',', $val);
 				
 				if ($many_many_parent->hasExtension('ManyManySortable')) {
-					$files = $many_many_parent->ManyManySorted();
+					$files = $many_many_parent->ManyManySorted(null, $this->Name());
 				}
 				else {
 					$files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($list).")");
