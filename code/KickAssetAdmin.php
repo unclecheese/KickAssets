@@ -286,6 +286,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	public function updatefilename(SS_HTTPRequest $r) {
 		if($file = DataObject::get_by_id("File", (int) $r->requestVar('fileid'))) {
 			$file->setName($r->requestVar('new'));
+			$file->Title = $r->requestVar('new'); 
 			$file->write();
 			$template = $file instanceof Folder ? "Folder" : "File";
 			return $this->customise($this->getFields($file))->renderWith($template);
