@@ -2,7 +2,7 @@
 <div class="file_drop <% if File %><% else %>empty<% end_if %>" data-uploadurl="$UploadLink"
 	<% if File %>
 		<% control File %>
-		style="background-image:url($Thumb)"
+		style="background-image:url('$Thumb')"
 		<% end_control %>
 	<% end_if %>					
 >
