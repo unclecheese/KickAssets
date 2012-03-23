@@ -305,6 +305,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 				$file->Title = $r->requestVar('new');
 			}
 			$file->setName($r->requestVar('new'));
+			$file->Title = $r->requestVar('new'); 
 			$file->write();
 			$template = $file instanceof Folder ? "Folder" : "File";
 			return $this->customise($this->getFields($file))->renderWith($template);
