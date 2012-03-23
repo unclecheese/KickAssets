@@ -1,0 +1,3 @@
+[submodule "javascript/apprise"]
+	path = javascript/apprise
+	url = git://github.com/lingo/Apprise.git

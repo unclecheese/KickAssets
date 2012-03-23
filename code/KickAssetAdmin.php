@@ -107,7 +107,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		Requirements::css('kickassets/css/kickassets.css');
 		Requirements::javascript('kickassets/javascript/jquery.js');
 		Requirements::javascript(THIRDPARTY_DIR.'/jquery-livequery/jquery.livequery.js');
-		Requirements::javascript('kickassets/javascript/apprise/apprise.js');
+		Requirements::javascript('kickassets/javascript/apprise/apprise-1.5.full.js');
 		Requirements::javascript('kickassets/javascript/jquery.tooltip.js');
 		Requirements::css('kickassets/javascript/apprise/apprise.css');
 		Requirements::javascript('kickassets/javascript/kickassets_ui.js');
