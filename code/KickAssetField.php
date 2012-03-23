@@ -22,6 +22,12 @@ abstract class KickAssetField extends FormField {
 
 	
 	/**
+	 * @var string ClassName to limit file selection, eg  'Folder', 'Image', etc.
+	 */
+	public $limitFileType = null;
+
+
+	/**
 	 * @var string Path to the starting folder, e.g. "assets/my-folder"
 	 */
 	public $defaultFolder = null;
@@ -69,6 +75,10 @@ abstract class KickAssetField extends FormField {
 	 */
 	public function setDefaultFolder($folder) {
 		$this->defaultFolder = Folder::findOrMake($folder);
+	}
+
+	public function setLimitFileType($className) {
+		$this->limitFileType = $className;
 	}
 
 
@@ -146,7 +156,7 @@ abstract class KickAssetField extends FormField {
 	 */
 	public function BrowseLink() {
 		$folder = $this->defaultFolder ? $this->defaultFolder : singleton('Folder');
-		return Director::absoluteBaseURL() . "/admin/files/select/{$folder->ID}";
+		return Director::absoluteBaseURL() . "/admin/files/select/{$folder->ID}/{$this->limitFileType}";
 	}
 	
 	

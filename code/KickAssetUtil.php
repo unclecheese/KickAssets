@@ -64,7 +64,7 @@ abstract class KickAssetUtil {
 	 * @param Folder A folder that will be the destination of the upload.
 	 * @return array|string
 	 */	
-	public static function handle_upload(SS_HTTPRequest $r, $folder = null) {
+	public static function handle_upload(SS_HTTPRequest $r, $folder = null, $allowed_extensions = null) {
 		if(!$folder) {
 			$folder = singleton('Folder');
 		}
@@ -88,8 +88,12 @@ abstract class KickAssetUtil {
 
 						// Set up the validator instance with rules
 						$validator = new Upload_Validator();
-						 $validator->setAllowedExtensions(File::$allowed_extensions);
-						 $validator->setAllowedMaxFileSize(self::$allowed_max_file_size);
+						if (!$allowed_extensions) {
+							$allowed_extensions = File::$allowed_extensions;
+						}
+
+						$validator->setAllowedExtensions($allowed_extensions);
+						$validator->setAllowedMaxFileSize(self::$allowed_max_file_size);
 
 						// Do the upload validation with the rules
 						$upload = new Upload();
