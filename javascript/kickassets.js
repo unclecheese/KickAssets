@@ -71,7 +71,7 @@
 		
 		http.addEventListener("load", function () {
 			if(http.responseText != "OK") {
-				apprise(http.responseText);
+				apprise(http.responseText, {appendTo:'#drop'});
 			}
 			refreshFiles();
 			if($('#drop').is('.open')) {
@@ -123,7 +123,7 @@ $(document).ready(function() {
 	
 	$('#filesystemsync').click(function() {
 		$.get($(this).attr('href'), function(data) {
-			apprise(data);
+			apprise(data, {appendTo:'#drop'});
 		});
 		return false;
 	});
@@ -360,7 +360,7 @@ $(document).ready(function() {
 		http.addEventListener("load", function () {
 			window.clearTimeout(uploadTimeout);
 			if(http.status != "200") {
-				apprise(http.responseText);
+				apprise(http.responseText, {appendTo:'#drop'});
 			}
 			else {
 				refreshFiles();
@@ -410,7 +410,7 @@ $(document).ready(function() {
 		$('.ui-selected').each(function() {
 			files.push($(this).data('id'));
 		});
-		apprise($t.data('confirmtext'),{'confirm':true},function(r) {
+		apprise($t.data('confirmtext'),{'confirm':true,appendTo:'#drop'},function(r) {
 			if(r) {
 				$('#drop').load($t.attr('href'), {list : files});				
 			}

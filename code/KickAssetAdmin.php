@@ -84,7 +84,14 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	 */
 	public $editMode = false;
 	
-	
+
+	/**
+	 * Set this to limit files to a certain type.
+	 *
+	 * @var string ClassName to select, eg. 'Folder', 'Image', 'File'
+	 * Default is no limit, which should show all folders and files.
+	 */
+	static $limit_file_type = false;
 	
 	/**
 	 * Loads the requirements, checks perms, etc. If an ID is in the URL, that becomes the
@@ -100,7 +107,7 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 		Requirements::css('kickassets/css/kickassets.css');
 		Requirements::javascript('kickassets/javascript/jquery.js');
 		Requirements::javascript(THIRDPARTY_DIR.'/jquery-livequery/jquery.livequery.js');
-		Requirements::javascript('kickassets/javascript/apprise/apprise.js');
+		Requirements::javascript('kickassets/javascript/apprise/apprise-1.5.full.js');
 		Requirements::javascript('kickassets/javascript/jquery.tooltip.js');
 		Requirements::css('kickassets/javascript/apprise/apprise.css');
 		Requirements::javascript('kickassets/javascript/kickassets_ui.js');
@@ -205,6 +212,14 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	 * @return array
 	 */
 	public function browse(SS_HTTPRequest $r) {
+		$limitClass = null;
+		if (!$limitClass && $r->param('OtherID')) {
+			// Pass in through request
+			$limitClass = Convert::raw2sql($r->param('OtherID'));
+		}
+		if ($limitClass) {
+			self::$limit_file_type = $limitClass;
+		}
 		if(Director::is_ajax()) {
 			return $this->renderWith('FileList');
 		}
@@ -472,7 +487,13 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	 * @return DataObjectSet
 	 */
 	public function Files() {		
-		$set = DataObject::get("File","ClassName != 'Folder' AND ParentID = {$this->getCurrentFolderID()}");
+		$className = 'File';
+		$where = "ClassName != 'Folder' AND ParentID = {$this->getCurrentFolderID()}";
+		if (self::$limit_file_type) {
+			$className = self::$limit_file_type;
+			$where = "ClassName = '{$className}' AND ParentID = {$this->getCurrentFolderID()}";
+		}
+		$set = DataObject::get($className, $where);
 		if(!$set) return false;
 		$ret = new DataObjectSet();
 		foreach($set as $file) {
