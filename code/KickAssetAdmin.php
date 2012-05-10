@@ -663,7 +663,6 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 			new HiddenField('ID','')
 		);
 		
-		$this->updateExtensionCMSFields($this, $fields);
 		foreach ($file->extension_instances as $ext) {
 			$this->updateExtensionCMSFields($ext, $fields);
 		}
@@ -680,14 +679,14 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 	 * @param FieldSet
 	 */
 	protected function updateExtensionCMSFields($ext, $fields) {
-		if($ext->hasMethod('updateCMSFields')) {
-			if(version_compare(PHP_VERSION, '5.3') >= 0) {
-				$ext->updateCMSFields(&$fields);
-			}
-			else {
-				$ext->updateCMSFields($fields);
-			}
+
+		if(version_compare(PHP_VERSION, '5.3') >= 0) {
+			$ext->updateCMSFields(&$fields);
 		}
+		else {
+			$ext->updateCMSFields($fields);
+		}
+
 	}
 
 
