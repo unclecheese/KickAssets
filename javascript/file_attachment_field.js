@@ -159,6 +159,8 @@ $(function() {
 			  e.preventDefault();
 			  e.stopPropagation();
 		 }).live('drop', function(e) {
+			  if(e.handled == true) return;
+			  e.handled = true;
 			  if(e.originalEvent.dataTransfer) {
 	              if (e.originalEvent.dataTransfer.files.length) {
 
