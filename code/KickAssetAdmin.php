@@ -662,18 +662,31 @@ class KickAssetAdmin extends LeftAndMain implements PermissionProvider {
 			new LiteralField('ReplaceFileText','<h4>'._t('KickAssets.REPLACEFILE','Replace file').'</h4><div id="replace-file" data-uploadurl="'.$this->Link("replace/{$this->getCurrentFolderID()}/{$file->ID}").'">'.$filename.'</div>'),
 			new HiddenField('ID','')
 		);
+		
+		foreach ($file->extension_instances as $ext) {
+			$this->updateExtensionCMSFields($ext, $fields);
+		}
+
 		$owner->setEmptyString('('._t('KickAssets.NONE','None').')');
 		$folders->setEmptyString('(root)');
-		if($file->hasMethod('updateCMSFields')) {
-			if(version_compare(PHP_VERSION, '5.3') >= 0) {
-				$file->updateCMSFields(&$fields);	
-			}
-			else {
-				$file->updateCMSFields($fields);	
-			}
-			
-		}
+
 		return $fields;
+	}
+
+	/**
+	 * Allow for the decorator pattern by providing and extend() to updateCMSFields.
+	 * @param Object
+	 * @param FieldSet
+	 */
+	protected function updateExtensionCMSFields($ext, $fields) {
+
+		if(version_compare(PHP_VERSION, '5.3') >= 0) {
+			$ext->updateCMSFields(&$fields);
+		}
+		else {
+			$ext->updateCMSFields($fields);
+		}
+
 	}
 
 
