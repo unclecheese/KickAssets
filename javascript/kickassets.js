@@ -407,7 +407,7 @@ $(document).ready(function() {
 		
 		var $t = $(this);
 		var files = [];
-		$('.ui-selected').each(function() {
+		$('.ui-selected:visible').each(function() {
 			files.push($(this).data('id'));
 		});
 		apprise($t.data('confirmtext'),{'confirm':true,appendTo:'#drop'},function(r) {
@@ -501,7 +501,7 @@ $(document).ready(function() {
 	$('#attach').click(function() {
 		if(!$(this).is('.disabled')) {
 			var ids = [];
-			$('.ui-selected').each(function() {
+			$('.ui-selected:visible').each(function() {
 				ids.push($(this).data('id'));
 			});
 			$('#selected_files').append(ids.join(','));
