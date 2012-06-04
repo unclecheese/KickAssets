@@ -178,7 +178,7 @@ $(function() {
 				e.stopPropagation();
 				$(this).removeClass('over');
 		  });
-      },
+      }
 
 
 
