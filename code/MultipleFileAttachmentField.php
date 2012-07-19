@@ -105,12 +105,13 @@ class MultipleFileAttachmentField extends KickAssetField {
 			if(is_array($val)) {
 				$list = implode(',', $val);
 				
-				if ($this->isSortable()) {
+				if ($many_many_parent->hasExtension('ManyManySortable') && method_exists($many_many_parent, "ManyManySorted")) {
 					$files = $many_many_parent->ManyManySorted();
 				}
 				else {
 					$files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($list).")");
 				}
+				$files = DataObject::get("File", "\"File\".\"ID\" IN (".Convert::raw2sql($list).")");
 				if($files->Count() > 0) {
 					$ret = new DataObjectSet();
 					foreach($files as $file) {
@@ -148,8 +149,10 @@ class MultipleFileAttachmentField extends KickAssetField {
 
 		if(isset($_REQUEST[$this->name]) && is_array($_REQUEST[$this->name])) {
 			if($relation_name = $this->getForeignRelationName($record)) {
+
 				// Assign all the new relations (may have already existed)
 				$data = $_REQUEST;
+
 				for($count = 0; $count < count($data[$this->name]); ++$count) {
 					$id = $data[$this->name][$count];
 					if($file = DataObject::get_by_id("File", $id)) {
@@ -162,7 +165,6 @@ class MultipleFileAttachmentField extends KickAssetField {
 						else {
 							$currentComponentSet->add($new);
 						}
-						
 					}
 				}
 			}
