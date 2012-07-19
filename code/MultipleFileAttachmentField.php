@@ -8,8 +8,6 @@
  */
 
 class MultipleFileAttachmentField extends KickAssetField {
-
-
 	
 	/**
 	 * @var boolean A simple template variable that states whether this is a multiple
