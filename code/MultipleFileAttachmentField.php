@@ -67,15 +67,15 @@ class MultipleFileAttachmentField extends KickAssetField {
 	public function refresh(SS_HTTPRequest $r) {
 		if($r->requestVar('ids')) {
 			$ids = array_unique($r->requestVar('ids'));
-			$files = new DataObjectSet();
+			$files = $this->Files();
+			if(!$files) $files = new DataObjectSet();
 			$implodestring = implode(',',$ids);
 			$implodestring = preg_replace("/^[,]/", "", $implodestring);
-			if($set = DataObject::get("File", "`ID` IN ($implodestring)")) {
+			if($set = DataObject::get("File", "`ID` IN ($implodestring)", "ID ASC")) {
 				foreach($set as $file) {
 					$this->processFile($file);
 					$files->push($file);					
 				}
-				$files->merge($this->Files());
 				$files->removeDuplicates();
 			}
 			else {
