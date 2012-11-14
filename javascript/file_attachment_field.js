@@ -2,6 +2,19 @@ var $parentField;
 
 (function($) {
 $(function() {
+
+	function fetchIDs($parentField) {
+		var ids = [];
+		var $wrap = $parentField.closest('.FileAttachmentField');
+		// make sure we don't lose any unsaved files.
+		if($wrap.is('.multi')) {
+			$wrap.find('.file_block').each(function() {
+				ids.push( $(this).find(':hidden').val() );
+			});
+		}
+		return ids;
+	}
+
 	$('.file_attach_btn').livequery(function() {
 		$(this).fancybox({
 			'width'				: '90%',
@@ -18,18 +31,14 @@ $(function() {
 			'onCleanup'			: function() {
 				var ids = $('#fancybox-frame').contents().find('#selected_files').text();
 				if(!ids.length) return;
+				ids = ids.split(',');
+				ids = ids.concat(fetchIDs($parentField));
 				
 				var $wrap = $parentField.closest('.FileAttachmentField');
-				// make sure we don't lose any unsaved files.
-				if($wrap.is('.multi')) {
-					$wrap.find('.file_block').each(function() {
-						ids += ',';
-						ids += $(this).find(':hidden').val();
-					})
-				}
+
 				$wrap.find('.attached_files').load(
 					$parentField.attr('data-refreshlink'),
-					{ 'ids' : ids.split(',') }
+					{ 'ids' : ids }
 				);
 				$parentField = null;
 			}
@@ -124,10 +133,13 @@ $(function() {
 				alert(http.responseText);
 			}
 			else {
-				var $div = $t.closest('.FileAttachmentField')
+				var ids = http.responseText.split(',');
+				ids = ids.concat(fetchIDs($t));
+
+				var $div = $t.closest('.FileAttachmentField');
 				$div.find('.attached_files').load(
 					$div.attr('data-refreshlink'),
-					{ 'ids' : http.responseText.split(',')}
+					{ 'ids' : ids }
 				);
 			}
 		}, false);
