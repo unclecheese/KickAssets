@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title><% _t('AssetAdmin.MENUTITLE','Files & Images') %></title>
 	</head>
-	<body>
+	<body id="KickAssets">
 		
 		<div id="head">
 			<h2>$BreadCrumbs</h2>
