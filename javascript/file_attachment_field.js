@@ -2,13 +2,26 @@ var $parentField;
 
 (function($) {
 $(function() {
+
+	function fetchIDs($parentField) {
+		var ids = [];
+		var $wrap = $parentField.closest('.FileAttachmentField');
+		// make sure we don't lose any unsaved files.
+		if($wrap.is('.multi')) {
+			$wrap.find('.file_block').each(function() {
+				ids.push( $(this).find(':hidden').val() );
+			});
+		}
+		return ids;
+	}
+
 	$('.file_attach_btn').livequery(function() {
 		$(this).fancybox({
 			'width'				: '90%',
 			'height'			: '98%',
-	        'autoScale'     	: false,
+			'autoScale'			: false,
 			'padding'			: 0,
-	        'transitionIn'		: 'none',
+			'transitionIn'		: 'none',
 			'transitionOut'		: 'none',
 			'titleShow'			: false,
 			'type'				: 'iframe',
@@ -18,22 +31,18 @@ $(function() {
 			'onCleanup'			: function() {
 				var ids = $('#fancybox-frame').contents().find('#selected_files').text();
 				if(!ids.length) return;
+				ids = ids.split(',');
+				ids = ids.concat(fetchIDs($parentField));
 				
 				var $wrap = $parentField.closest('.FileAttachmentField');
-				// make sure we don't lose any unsaved files.
-				if($wrap.is('.multi')) {
-					$wrap.find('.file_block').each(function() {
-						ids += ',';
-						ids += $(this).find(':hidden').val();
-					})
-				}
+
 				$wrap.find('.attached_files').load(
 					$parentField.attr('data-refreshlink'),
-					{ 'ids' : ids.split(',') }
+					{ 'ids' : ids }
 				);
-				$parentField = null;				
+				$parentField = null;
 			}
-		})
+		});
 	});
 	
 	$('.detach_btn').live("click",function() {
@@ -47,7 +56,7 @@ $(function() {
 			$div.find('.file_drop').addClass('empty').css('background-image','none');
 			$div.find('.file_name').empty();
 			$(this).remove();
-			$div.find('input[value='+id+']').val(0);			
+			$div.find('input[value='+id+']').val(0);
 		}
 		showNoFile(false);
 		return false;
@@ -55,8 +64,8 @@ $(function() {
 	
 	$('.file_attach_upload').live("change", function(e) {
 		doUpload($(this), e.target.files, $(this).attr('data-uploadurl'));
-        e.preventDefault();
-        e.stopPropagation();
+		e.preventDefault();
+		e.stopPropagation();
 	}).live("mouseenter", function() {
 		$(this).siblings('.file_upload_btn').addClass('over');
 	}).live("mouseleave", function() {
@@ -70,7 +79,7 @@ $(function() {
 				$('.file_cancel_btn').show();
 			}
 			$('.controls_no_file').fadeIn();
-		})				
+		});
 	};
 	
 	
@@ -78,10 +87,10 @@ $(function() {
 		$('.controls_no_file').fadeOut(function() {
 			$('.file_cancel_btn').hide();
 			$('.controls_has_file').fadeIn();
-		})		
-	}
+		});
+	};
 	
-	$('.replace_btn').live("click", function() {showNoFile(true)});
+	$('.replace_btn').live("click", function() {showNoFile(true);});
 	
 	$('.file_cancel_btn').live("click", showHasFile);
 
@@ -91,23 +100,23 @@ $(function() {
 			var $t = $(this);
 			$.get($t.attr('href'), function() {
 				$t.siblings('.detach_btn').click();
-			})
+			});
 		}
 		return false;
 	});
 	
 
 	var doUpload = function($t, files, url) {
-        var http = new XMLHttpRequest();
-  		if($t.closest('.FileAttachmentField').is('.single') && files.length > 1) {
+		var http = new XMLHttpRequest();
+		if($t.closest('.FileAttachmentField').is('.single') && files.length > 1) {
 			return false;
-		} 
+		}
 		var $progressBar = $t.closest('.FileAttachmentField').find('.progress');
 
 		var uploadTimeout = window.setTimeout(function() {
 		$progressBar.parent().css('visibility', 'visible');
 		// Update progress bar
-		http.upload.addEventListener("progress", function (evt) {						
+		http.upload.addEventListener("progress", function (evt) {
 			if (evt.lengthComputable) {
 				$progressBar.css('width', (evt.loaded / evt.total) * 100 + "%");
 			}
@@ -115,7 +124,7 @@ $(function() {
 			}
 		}, false);
 		},1000);
-		var url = $t.attr('data-uploadurl');
+		url = $t.attr('data-uploadurl');
 
 		http.addEventListener("load", function () {
 			window.clearTimeout(uploadTimeout);
@@ -124,61 +133,64 @@ $(function() {
 				alert(http.responseText);
 			}
 			else {
-				var $div = $t.closest('.FileAttachmentField')
+				var ids = http.responseText.split(',');
+				ids = ids.concat(fetchIDs($t));
+
+				var $div = $t.closest('.FileAttachmentField');
 				$div.find('.attached_files').load(
 					$div.attr('data-refreshlink'),
-					{ 'ids' : http.responseText.split(',')}
+					{ 'ids' : ids }
 				);
 			}
 		}, false);
 
 
-        if (typeof(FormData) != 'undefined') {
-          var form = new FormData();
+		if (typeof(FormData) != 'undefined') {
+			var form = new FormData();
 
-          for (var i = 0; i < files.length; i++) {
-            form.append('file[]', files[i]);
-          }
+			for (var i = 0; i < files.length; i++) {
+				form.append('file[]', files[i]);
+			}
 
-          http.open('POST', url);
-          http.send(form);
-        } 
+			http.open('POST', url);
+			http.send(form);
+		}
 		else {
-          alert('Your browser does not support standard HTML5 Drag and Drop');
-        }
+			alert('Your browser does not support standard HTML5 Drag and Drop');
+		}
 
-	}
+	};
 
-    var dnd = {
-      ready : function() {        
-        $('.file_drop').live('dragenter', function(e) {
-              e.preventDefault();
-              e.stopPropagation();
-			  $(this).addClass('over');
-         }).live('dragover', function(e) {
-			  e.preventDefault();
-			  e.stopPropagation();
-		 }).live('drop', function(e) {
-			  if(e.handled == true) return;
-			  e.handled = true;
-			  if(e.originalEvent.dataTransfer) {
-	              if (e.originalEvent.dataTransfer.files.length) {
+	var dnd = {
+		ready : function() {
+			$('.file_drop').live('dragenter', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				$(this).addClass('over');
+			}).live('dragover', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+			}).live('drop', function(e) {
+				if(e.handled == true) return;
+				e.handled = true;
+				if(e.originalEvent.dataTransfer) {
+					if (e.originalEvent.dataTransfer.files.length) {
 
-					var files = e.originalEvent.dataTransfer.files;
-					var $t = $(this);
-					doUpload($t, files, $t.attr('data-uploadurl'));
-			        e.preventDefault();
-			        e.stopPropagation();
-					$(this).removeClass('over');
-					
-	              }
-			   }	
-          }).live('dragleave', function(e) {
+						var files = e.originalEvent.dataTransfer.files;
+						var $t = $(this);
+						doUpload($t, files, $t.attr('data-uploadurl'));
+						e.preventDefault();
+						e.stopPropagation();
+						$(this).removeClass('over');
+
+					}
+				}
+			}).live('dragleave', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				$(this).removeClass('over');
-		  });
-      }
+			});
+		}
 
 
 
@@ -186,5 +198,5 @@ $(function() {
 	
 	$('.file_drop').livequery(dnd.ready);
 
-})
+});
 })(jQuery);
