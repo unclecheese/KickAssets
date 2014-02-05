@@ -156,7 +156,7 @@ abstract class KickAssetField extends FormField {
 	 */
 	public function BrowseLink() {
 		$folder = $this->defaultFolder ? $this->defaultFolder : singleton('Folder');
-		return Director::absoluteBaseURL() . "/admin/files/select/{$folder->ID}/{$this->limitFileType}";
+		return Director::absoluteBaseURL() . "admin/files/select/{$folder->ID}/{$this->limitFileType}";
 	}
 	
 	
