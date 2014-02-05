@@ -398,7 +398,7 @@ $(document).ready(function() {
 	$('.folder img, .grid .folder').live('dblclick', function(e) {
 		if($(e.target).is('.editable')) return;
 		var $t = $(this).closest('li');
-		window.location.href = $t.data('link');
+		window.location.href = $('base').attr('href') + $t.data('link');
 		return false;
 	});
 
